@@ -1,1 +1,4 @@
-// HEADER TYPES HERE
+export interface HeaderProps {
+  onAddMealClick?: () => void;
+  className?: string;
+}
