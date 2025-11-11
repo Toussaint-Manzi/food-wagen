@@ -85,7 +85,7 @@ export const Hero = ({ className = "" }: HeroProps) => {
           </div>
 
           {/* Divider line */}
-          <div className="w-full 2xl:w-[808px] h-px bg-[#EEEEEE] my-2 2xl:my-0"></div>
+          <div className="w-full 2xl:w-[808px] h-px bg-[#EEEEEE] my-2"></div>
 
           {/* Search Input Section */}
           <div className="food-search-section w-full 2xl:w-[808px] h-auto 2xl:h-[108px] flex flex-col sm:flex-row items-stretch sm:items-center gap-2 md:gap-3 2xl:gap-4">
