@@ -6,6 +6,7 @@ import { Hero } from "@/components/organisms/hero/hero";
 import { FeaturedMeals } from "@/components/organisms/featured-meals/FeaturedMeals";
 import { FoodModal } from "@/components/organisms/food-modal/FoodModal";
 import { DeleteModal } from "@/components/organisms/delete-modal/DeleteModal";
+import { ToastMessage } from "@/components/atoms/toast-message/ToastMessage";
 import { FoodFormData } from "@/lib/validators";
 import { Footer } from "@/components/organisms/footer/footer";
 import { useAppDispatch, useAppSelector } from "@/store/store";
@@ -16,17 +17,20 @@ import {
   deleteFood,
   loadMore,
   selectPaginatedFoods,
-  selectFoodLoading,
+  selectLoading,
   selectHasMore,
-  selectAllFoods,
+  selectFoods,
+  Food,
 } from "@/store/features/food.slice";
+import { hideToast, selectToast, showToast } from "@/store/features/ui.slice";
 
 export default function Home() {
   const dispatch = useAppDispatch();
   const foods = useAppSelector(selectPaginatedFoods);
-  const allFoods = useAppSelector(selectAllFoods);
-  const loading = useAppSelector(selectFoodLoading);
+  const allFoods = useAppSelector(selectFoods);
+  const loading = useAppSelector(selectLoading);
   const hasMore = useAppSelector(selectHasMore);
+  const toast = useAppSelector(selectToast);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -78,8 +82,23 @@ export default function Home() {
 
   const handleConfirmDelete = async () => {
     if (deletingFoodId) {
-      await dispatch(deleteFood(deletingFoodId));
-      await dispatch(fetchFoods()); // Refetch to update UI
+      const result = await dispatch(deleteFood(deletingFoodId));
+      if (deleteFood.fulfilled.match(result)) {
+        dispatch(
+          showToast({
+            message: "Food item deleted successfully!",
+            type: "success",
+          })
+        );
+        await dispatch(fetchFoods()); // Refetch to update UI
+      } else {
+        dispatch(
+          showToast({
+            message: result.error.message || "Failed to delete food",
+            type: "error",
+          })
+        );
+      }
       setDeletingFoodId(undefined);
       setDeletingFoodName(undefined);
     }
@@ -87,10 +106,41 @@ export default function Home() {
 
   const handleModalSubmit = async (data: FoodFormData) => {
     if (modalMode === "add") {
-      await dispatch(createFood(data));
+      const result = await dispatch(createFood(data));
+      if (createFood.fulfilled.match(result)) {
+        dispatch(
+          showToast({
+            message: "Food item created successfully!",
+            type: "success",
+          })
+        );
+        await dispatch(fetchFoods()); // Refetch to update UI
+      } else {
+        dispatch(
+          showToast({
+            message: result.error.message || "Failed to create food",
+            type: "error",
+          })
+        );
+      }
     } else if (editingFoodId) {
-      await dispatch(updateFood({ id: editingFoodId, data }));
-      await dispatch(fetchFoods()); // Refetch to update UI
+      const result = await dispatch(updateFood({ id: editingFoodId, data }));
+      if (updateFood.fulfilled.match(result)) {
+        dispatch(
+          showToast({
+            message: "Food item updated successfully!",
+            type: "success",
+          })
+        );
+        await dispatch(fetchFoods()); // Refetch to update UI
+      } else {
+        dispatch(
+          showToast({
+            message: result.error.message || "Failed to update food",
+            type: "error",
+          })
+        );
+      }
     }
   };
 
@@ -129,6 +179,16 @@ export default function Home() {
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleConfirmDelete}
         foodName={deletingFoodName}
+      />
+
+      {/* Toast Notification */}
+      <ToastMessage
+        message={toast.message}
+        messageType={toast.type}
+        showToast={toast.show}
+        position="top-right"
+        duration={3000}
+        onClose={() => dispatch(hideToast())}
       />
     </div>
   );

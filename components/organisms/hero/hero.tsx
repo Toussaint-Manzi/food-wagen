@@ -4,18 +4,31 @@ import { useState } from "react";
 import Image from "next/image";
 import { Button } from "../../atoms/button/button";
 import { IconWrapper } from "../../atoms/icon-wrapper/IconWrapper";
-import { HeroProps, OrderType } from "./hero.types";
+import { OrderType } from "./hero.types";
 import { useAppDispatch } from "@/store/store";
 import { searchFoods, setSearchQuery } from "@/store/features/food.slice";
+import { showToast } from "@/store/features/ui.slice";
 
-export const Hero = ({ className = "" }: HeroProps) => {
+export const Hero = () => {
   const dispatch = useAppDispatch();
   const [orderType, setOrderType] = useState<OrderType>("delivery");
   const [localSearchQuery, setLocalSearchQuery] = useState("");
 
-  const handleSearch = () => {
-    dispatch(setSearchQuery(localSearchQuery));
-    dispatch(searchFoods(localSearchQuery));
+  const handleSearch = async (query?: string) => {
+    const searchValue = query !== undefined ? query : localSearchQuery;
+    dispatch(setSearchQuery(searchValue));
+    if (searchValue.trim()) {
+      const result = await dispatch(searchFoods(searchValue));
+      console.log("Search result:", result);
+      if (searchFoods.rejected.match(result)) {
+        dispatch(
+          showToast({
+            message: result.error.message || "Failed to search foods",
+            type: "error",
+          })
+        );
+      }
+    }
   };
 
   return (
@@ -111,7 +124,7 @@ export const Hero = ({ className = "" }: HeroProps) => {
 
             {/* Find Meal Button */}
             <Button
-              onClick={handleSearch}
+              onClick={() => handleSearch()}
               className="food-find-meal-btn text-white text-sm md:text-base lg:text-[17px] 2xl:text-[18px] font-bold leading-[100%] h-[48px] md:h-[54px] lg:h-[58px] 2xl:h-[60px] w-full sm:w-auto md:w-[160px] lg:w-[180px] 2xl:w-[197px] rounded-lg 2xl:rounded-xl flex items-center justify-center gap-2"
               style={{
                 background: "linear-gradient(90deg, #FF7A7A 0%, #F65900 100%)",

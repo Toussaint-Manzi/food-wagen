@@ -1,39 +1,20 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  getAllFoods,
-  searchFoodByName,
   createFood as createFoodApi,
-  updateFood as updateFoodApi,
   deleteFood as deleteFoodApi,
-  mapFoodApiToApp,
+  getAllFoods,
   mapAppToFoodApi,
+  mapFoodApiToApp,
+  searchFoodByName,
+  updateFood as updateFoodApi,
 } from "@/services/food.service";
 import type { ApiErrorResponse } from "@/api/config.types";
 import type { FoodFormData } from "@/lib/validators";
 import type { RootState } from "@/store/store";
+import type { Food, FoodState } from "./food.slice.types";
 
-// Types
-export interface Food {
-  id: string;
-  name: string;
-  rating: number;
-  avatar: string;
-  restaurantName: string;
-  logo: string;
-  status: "Open Now" | "Closed";
-  price: number;
-}
-
-export interface FoodState {
-  foods: Food[];
-  filteredFoods: Food[];
-  loading: boolean;
-  error: string | null;
-  searchQuery: string;
-  currentPage: number;
-  itemsPerPage: number;
-  hasMore: boolean;
-}
+// Re-export Food type for backward compatibility
+export type { Food } from "./food.slice.types";
 
 const initialState: FoodState = {
   foods: [],
@@ -221,7 +202,6 @@ const foodSlice = createSlice({
       })
       .addCase(updateFood.fulfilled, (state) => {
         state.loading = false;
-        // Will refetch in component to update UI
       })
       .addCase(updateFood.rejected, (state, action) => {
         state.loading = false;
@@ -236,7 +216,6 @@ const foodSlice = createSlice({
       })
       .addCase(deleteFood.fulfilled, (state) => {
         state.loading = false;
-        // Will refetch in component to update UI
       })
       .addCase(deleteFood.rejected, (state, action) => {
         state.loading = false;
@@ -248,17 +227,18 @@ const foodSlice = createSlice({
 export const { setSearchQuery, clearError, loadMore, resetPagination } =
   foodSlice.actions;
 
-// Used selectors because these are either computed values or used in multiplecomponents so to avoid repetition
-export const selectAllFoods = (state: RootState) => state.food.foods;
+// Selectors
+export const selectFoods = (state: RootState) => state.food.foods;
 export const selectFilteredFoods = (state: RootState) =>
   state.food.filteredFoods;
-export const selectFoodLoading = (state: RootState) => state.food.loading;
-export const selectFoodError = (state: RootState) => state.food.error;
+export const selectLoading = (state: RootState) => state.food.loading;
+export const selectError = (state: RootState) => state.food.error;
 export const selectSearchQuery = (state: RootState) => state.food.searchQuery;
+export const selectCurrentPage = (state: RootState) => state.food.currentPage;
+export const selectHasMore = (state: RootState) => state.food.hasMore;
 export const selectPaginatedFoods = (state: RootState) => {
   const { filteredFoods, currentPage, itemsPerPage } = state.food;
   return filteredFoods.slice(0, currentPage * itemsPerPage);
 };
-export const selectHasMore = (state: RootState) => state.food.hasMore;
 
 export default foodSlice.reducer;

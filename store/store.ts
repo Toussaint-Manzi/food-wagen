@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import foodReducer from "./features/food.slice";
+import uiReducer from "./features/ui.slice";
 
 export const store = configureStore({
   reducer: {
     food: foodReducer,
+    ui: uiReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
