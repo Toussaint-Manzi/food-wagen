@@ -1,29 +1,43 @@
-"use client";
+import React from "react";
+import { ButtonProps } from "./Button.types";
 
-import { ButtonProps } from "./button.types";
-import { Spinner } from "../spinner/spinner";
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      children,
+      variant = "primary",
+      className = "",
+      disabled,
+      type = "button",
+      ...rest
+    },
+    ref
+  ) => {
+    const base = `text-16px py-[13px] rounded-[8px] ${className}`.trim();
 
-export const Button = ({
-  children,
-  onClick,
-  disabled = false,
-  loading = false,
-  icon,
-  className = "",
-  ...props
-}: ButtonProps) => {
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled || loading}
-      className={`food-btn flex items-center justify-center gap-2 ${className} ${
-        disabled || loading ? "opacity-50 cursor-not-allowed" : ""
-      }`}
-      {...props}
-    >
-      {loading && <Spinner size="small" />}
-      {!loading && icon && icon}
-      {children}
-    </button>
-  );
-};
+    // simple variant handling following project's tokens
+    const stateClass = disabled
+      ? "bg-border text-text-secondary"
+      : variant === "primary"
+      ? "bg-[linear-gradient(90deg,#2663EB_0%,#5187FF_100%)] text-white"
+      : "";
+
+    const classes = `${base} ${stateClass}`.trim();
+
+    return (
+      <button
+        ref={ref}
+        type={type}
+        disabled={disabled}
+        className={classes}
+        {...rest}
+      >
+        {children}
+      </button>
+    );
+  }
+);
+
+Button.displayName = "Button";
+
+export default Button;

@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "../../atoms/button/button";
 import Logo from "@/components/utils/logo/Logo";
+import Button from "@/components/atoms/button/Button";
 
 export const Header = () => {
   const handleAddMealClick = () => {
@@ -11,7 +11,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="food-header w-full px-[220px] py-4 bg-white">
+    <header className="food-header w-full px-4 sm:px-6 md:px-[220px] py-3 md:py-4 bg-white">
       <div className="food-header-container max-w-[1440px] mx-auto flex items-center justify-between">
         {/* Logo Section */}
         <Logo />
@@ -19,7 +19,7 @@ export const Header = () => {
         {/* Add Meal Button */}
         <Button
           onClick={handleAddMealClick}
-          className="food-add-meal-btn text-white text-[17px] font-bold leading-[100%] w-[150px] h-[42px] rounded-[14px]"
+          className="food-add-meal-btn text-white text-sm md:text-[17px] font-bold leading-[100%] w-[120px] md:w-[150px] h-[38px] md:h-[42px] rounded-[14px]"
           style={{
             background: "linear-gradient(90deg, #FFBA26 0%, #FF9A0E 100%)",
             boxShadow:

@@ -22,9 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${sourceSans.variable} antialiased `}>
+      <body className={`${sourceSans.variable} antialiased`}>
         <Header />
-        <main className="container mx-auto px-4 py-6">{children}</main>
+        <main className="">{children}</main>
         <Footer />
       </body>
     </html>

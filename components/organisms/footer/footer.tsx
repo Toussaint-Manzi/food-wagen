@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "../../atoms/button/button";
+import { Button } from "../../atoms/button/Button";
 import { FooterProps } from "./Footer.types";
 import Link from "next/link";
 import { IconWrapper } from "@/components/atoms/icon-wrapper/IconWrapper";
@@ -77,24 +77,24 @@ export const Footer = ({ className = "" }: FooterProps) => {
 
   return (
     <footer
-      className={`food-footer bg-[#212121] px-[201px] text-white ${className}`}
+      className={`food-footer bg-[#212121] px-4 sm:px-6 md:px-[201px] text-white ${className}`}
     >
-      <div className="food-footer-container max-w-[1440px] mx-auto px-6">
+      <div className="food-footer-container max-w-[1440px] mx-auto">
         {/* Upper Section */}
-        <div className="food-footer-upper py-[63px] flex flex-col lg:flex-row justify-between gap-12 mb-8">
+        <div className="food-footer-upper py-8 md:py-[63px] flex flex-col lg:flex-row justify-between gap-8 lg:gap-12">
           {/* Left - Footer Links */}
-          <div className="food-footer-links flex flex-col md:flex-row gap-8 md:gap-16">
+          <div className="food-footer-links flex flex-col sm:flex-row gap-6 sm:gap-8 md:gap-16">
             {Object.values(footerLinks).map((category, idx) => (
               <div className="food-footer-category" key={category.title ?? idx}>
-                <h3 className="food-footer-category-title text-white font-bold text-[22px] leading-[120%] mb-10">
+                <h3 className="food-footer-category-title text-white font-bold text-lg md:text-[22px] leading-[120%] mb-6 md:mb-10">
                   {category.title}
                 </h3>
-                <ul className="food-footer-links-list space-y-4">
+                <ul className="food-footer-links-list space-y-3 md:space-y-4">
                   {category.links.map((link, i) => (
                     <li key={i}>
                       <Link
                         href={link.link}
-                        className="food-footer-link text-[##F5F5F5] text-[18px] font-normal leading-[100%] hover:text-primary transition-colors"
+                        className="food-footer-link text-[#F5F5F5] text-base md:text-[18px] font-normal leading-[100%] hover:text-primary transition-colors"
                       >
                         {link.label}
                       </Link>
@@ -106,70 +106,76 @@ export const Footer = ({ className = "" }: FooterProps) => {
           </div>
 
           {/* Right - Social & Newsletter */}
-          <div className="food-footer-social-newsletter flex flex-col gap-[43px]">
-            <h3 className="food-footer-social-title text-white font-bold text-[18px] leading-[120%] uppercase">
-              FOLLOW US
-            </h3>
-            <div className="food-footer-social-icons flex gap-4">
-              {socialMediaLinks.map((social, index) => (
-                <Link
-                  key={index}
-                  href={social.link}
-                  className="food-social-icon text-[#F5F5F5] hover:text-primary transition-colors"
-                  aria-label={social.name}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {social.icon}
-                </Link>
-              ))}
-            </div>
-            <h3 className="food-footer-newsletter-title text-white font-bold text-[18px] leading-[120%]">
-              Receive exclusive offers in your mailbox
-            </h3>
-            <div className="food-newsletter-form flex gap-4">
-              {/* Email Input */}
-              <div className="food-email-input-wrapper relative flex items-center w-[334px] h-[60px] bg-[#424242] rounded-lg px-4 py-2 gap-2.5">
-                <IconWrapper
-                  iconName="envelope"
-                  size={25}
-                  className="text-[#ADADAD]"
-                />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter Your email"
-                  className="food-email-input flex-1 bg-transparent text-white placeholder:text-[#9E9E9E] outline-none text-base leading-[140%]"
-                />
+          <div className="food-footer-social-newsletter flex flex-col gap-6 md:gap-[43px]">
+            <div>
+              <h3 className="food-footer-social-title text-white font-bold text-base md:text-[18px] leading-[120%] uppercase mb-3 md:mb-4">
+                FOLLOW US
+              </h3>
+              <div className="food-footer-social-icons flex gap-3 md:gap-4">
+                {socialMediaLinks.map((social, index) => (
+                  <Link
+                    key={index}
+                    href={social.link}
+                    className="food-social-icon text-[#F5F5F5] hover:text-primary transition-colors"
+                    aria-label={social.name}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {social.icon}
+                  </Link>
+                ))}
               </div>
+            </div>
 
-              <Button
-                onClick={handleSubscribe}
-                className="food-subscribe-btn text-white text-[17px] font-bold leading-[100%] w-[133px] h-[60px] rounded-lg"
-                style={{
-                  background:
-                    "linear-gradient(90deg, #FFB800 0%, #FF8A00 100%)",
-                  boxShadow:
-                    "0px 14px 32px 0px rgba(255, 178, 14, 0.29), 0px 5px 8px 0px rgba(222, 151, 0, 0.24)",
-                }}
-                data-test-id="food-subscribe-btn"
-              >
-                Subscribe
-              </Button>
+            <div>
+              <h3 className="food-footer-newsletter-title text-white font-bold text-base md:text-[18px] leading-[120%] mb-3 md:mb-4">
+                Receive exclusive offers in your mailbox
+              </h3>
+              <div className="food-newsletter-form flex flex-col sm:flex-row gap-2 md:gap-4">
+                {/* Email Input */}
+                <div className="food-email-input-wrapper relative flex items-center w-full sm:w-[280px] md:w-[334px] h-[50px] md:h-[60px] bg-[#424242] rounded-lg px-3 md:px-4 py-2 gap-2">
+                  <IconWrapper
+                    iconName="envelope"
+                    size={20}
+                    className="text-[#ADADAD] md:w-[25px] md:h-[25px]"
+                  />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter Your email"
+                    className="food-email-input flex-1 bg-transparent text-white placeholder:text-[#9E9E9E] outline-none text-sm md:text-base leading-[140%]"
+                  />
+                </div>
+
+                {/* Subscribe Button */}
+                <Button
+                  onClick={handleSubscribe}
+                  className="food-subscribe-btn text-white text-base md:text-[17px] font-bold leading-[100%] w-full sm:w-[120px] md:w-[133px] h-[50px] md:h-[60px] rounded-lg"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #FFB800 0%, #FF8A00 100%)",
+                    boxShadow:
+                      "0px 14px 32px 0px rgba(255, 178, 14, 0.29), 0px 5px 8px 0px rgba(222, 151, 0, 0.24)",
+                  }}
+                  data-test-id="food-subscribe-btn"
+                >
+                  Subscribe
+                </Button>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Lower Section - Copyright */}
-        <div className="food-footer-lower flex justify-between border-t-2 border-[#424242] pt-4 pb-[19px]">
-          <p className="food-footer-copyright text-center text-[#F5F5F5] text-[15px] font-400">
+        <div className="food-footer-lower flex flex-col sm:flex-row justify-between items-center gap-3 border-t-2 border-[#424242] pt-4 pb-4 md:pb-[19px]">
+          <p className="food-footer-copyright text-center text-[#F5F5F5] text-sm md:text-[15px] font-normal">
             All rights Reserved{" "}
             <span className="font-bold">
               © Your Company, {new Date().getFullYear() - 4}
             </span>
           </p>
-          <p className="food-footer-copyright text-center text-[#F5F5F5] text-[15px] font-400">
+          <p className="food-footer-copyright text-center text-[#F5F5F5] text-sm md:text-[15px] font-normal">
             Made with 💛 by <span className="font-bold">Themewagon</span>
           </p>
         </div>

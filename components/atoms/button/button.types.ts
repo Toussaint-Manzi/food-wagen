@@ -1,10 +1,6 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
-
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-  onClick?: () => void;
-  disabled?: boolean;
-  loading?: boolean;
-  icon?: ReactNode;
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: "primary" | "ghost" | string;
+  size?: "md" | string;
   className?: string;
-}
+  disabled?: boolean;
+};
