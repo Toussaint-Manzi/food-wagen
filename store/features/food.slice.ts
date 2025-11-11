@@ -219,18 +219,9 @@ const foodSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(updateFood.fulfilled, (state, action) => {
+      .addCase(updateFood.fulfilled, (state) => {
         state.loading = false;
-        const index = state.foods.findIndex((f) => f.id === action.payload.id);
-        if (index !== -1) {
-          state.foods[index] = action.payload;
-        }
-        const filteredIndex = state.filteredFoods.findIndex(
-          (f) => f.id === action.payload.id
-        );
-        if (filteredIndex !== -1) {
-          state.filteredFoods[filteredIndex] = action.payload;
-        }
+        // Will refetch in component to update UI
       })
       .addCase(updateFood.rejected, (state, action) => {
         state.loading = false;
@@ -243,14 +234,9 @@ const foodSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(deleteFood.fulfilled, (state, action) => {
+      .addCase(deleteFood.fulfilled, (state) => {
         state.loading = false;
-        state.foods = state.foods.filter((f) => f.id !== action.payload);
-        state.filteredFoods = state.filteredFoods.filter(
-          (f) => f.id !== action.payload
-        );
-        state.hasMore =
-          state.filteredFoods.length > state.currentPage * state.itemsPerPage;
+        // Will refetch in component to update UI
       })
       .addCase(deleteFood.rejected, (state, action) => {
         state.loading = false;

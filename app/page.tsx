@@ -79,6 +79,7 @@ export default function Home() {
   const handleConfirmDelete = async () => {
     if (deletingFoodId) {
       await dispatch(deleteFood(deletingFoodId));
+      await dispatch(fetchFoods()); // Refetch to update UI
       setDeletingFoodId(undefined);
       setDeletingFoodName(undefined);
     }
@@ -89,6 +90,7 @@ export default function Home() {
       await dispatch(createFood(data));
     } else if (editingFoodId) {
       await dispatch(updateFood({ id: editingFoodId, data }));
+      await dispatch(fetchFoods()); // Refetch to update UI
     }
   };
 
@@ -107,6 +109,7 @@ export default function Home() {
           onDelete={handleDelete}
           onLoadMore={handleLoadMore}
           hasMore={hasMore}
+          loading={loading}
         />
       </main>
       <Footer />

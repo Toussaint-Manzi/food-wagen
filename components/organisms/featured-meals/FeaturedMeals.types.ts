@@ -6,5 +6,6 @@ export interface FeaturedMealsProps {
   onDelete: (id: string) => void;
   onLoadMore: () => void;
   hasMore?: boolean;
+  loading?: boolean;
   className?: string;
 }
