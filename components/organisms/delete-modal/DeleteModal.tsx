@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { DeleteModalProps } from "./DeleteModal.types";
-import { Button } from "../../atoms/button/Button";
+import { Button } from "../../atoms/button/button";
 import { Spinner } from "../../atoms/spinner/spinner";
 
 export const DeleteModal = ({

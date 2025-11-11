@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/organisms/header/Header";
-import { Footer } from "@/components/organisms/footer/Footer";
 
 const sourceSans = Source_Sans_3({
   variable: "--font-source-sans",
@@ -23,9 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${sourceSans.variable} antialiased`}>
-        {/* <Header /> */}
         <main className="">{children}</main>
-        {/* <Footer /> */}
       </body>
     </html>
   );

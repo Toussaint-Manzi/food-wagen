@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Button } from "../../atoms/button/Button";
+import { Button } from "../../atoms/button/button";
 import { IconWrapper } from "../../atoms/icon-wrapper/IconWrapper";
 import { HeroProps, OrderType } from "./hero.types";
 

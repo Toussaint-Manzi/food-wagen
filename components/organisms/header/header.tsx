@@ -1,8 +1,8 @@
 "use client";
 
 import Logo from "@/components/utils/logo/Logo";
-import Button from "@/components/atoms/button/Button";
-import { HeaderProps } from "./Header.types";
+import Button from "@/components/atoms/button/button";
+import { HeaderProps } from "./header.types";
 
 export const Header = ({ onAddMealClick, className = "" }: HeaderProps) => {
   const handleAddMealClick = () => {

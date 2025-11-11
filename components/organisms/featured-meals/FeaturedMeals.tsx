@@ -2,7 +2,7 @@
 
 import { FeaturedMealsProps } from "./FeaturedMeals.types";
 import { FoodCard } from "../../molecules/food-card/FoodCard";
-import { Button } from "../../atoms/button/Button";
+import { Button } from "../../atoms/button/button";
 import { IconWrapper } from "@/components/atoms/icon-wrapper/IconWrapper";
 
 export const FeaturedMeals = ({

@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Header } from "@/components/organisms/header/Header";
+import { Header } from "@/components/organisms/header/header";
 import { Hero } from "@/components/organisms/hero/hero";
 import { FeaturedMeals } from "@/components/organisms/featured-meals/FeaturedMeals";
 import { FoodModal } from "@/components/organisms/food-modal/FoodModal";
 import { DeleteModal } from "@/components/organisms/delete-modal/DeleteModal";
-import { Footer } from "@/components/organisms/footer/Footer";
 import { FoodFormData } from "@/lib/validators";
+import { Footer } from "@/components/organisms/footer/footer";
 
 // Sample data - will be replaced with API data later
 const sampleFoods = [

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "../../atoms/button/Button";
-import { FooterProps } from "./Footer.types";
+import { Button } from "../../atoms/button/button";
+import { FooterProps } from "./footer.types";
 import Link from "next/link";
 import { IconWrapper } from "@/components/atoms/icon-wrapper/IconWrapper";
 

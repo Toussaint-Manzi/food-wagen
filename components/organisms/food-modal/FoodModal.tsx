@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FoodModalProps } from "./FoodModal.types";
 import { foodFormSchema, FoodFormData } from "@/lib/validators";
 import { FoodFormFields } from "../../molecules/food-form-fields/FoodFormFields";
-import { Button } from "../../atoms/button/Button";
+import { Button } from "../../atoms/button/button";
 import { Spinner } from "../../atoms/spinner/spinner";
 
 export const FoodModal = ({
