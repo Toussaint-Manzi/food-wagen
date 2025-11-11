@@ -1,1 +1,6 @@
-// INPUT TYPES HERE
+import { InputHTMLAttributes } from "react";
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  error?: string;
+  errorId?: string;
+}

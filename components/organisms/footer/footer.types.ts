@@ -1,1 +1,3 @@
-// THIS FORM TYPES HERE
+export interface FooterProps {
+  className?: string;
+}
