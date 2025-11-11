@@ -50,24 +50,23 @@ export const FeaturedMeals = ({
       )}
 
       {/* Load More Button */}
-      {hasMore ||
-        (loading && (
-          <div className="food-load-more-container flex justify-center">
-            <Button
-              onClick={onLoadMore}
-              className="food-load-more-btn text-white text-sm md:text-base 2xl:text-[17px] font-bold leading-[100%] w-[160px] md:w-[180px] 2xl:w-[200px] h-[50px] md:h-[56px] 2xl:h-[60px] rounded-xl 2xl:rounded-[14px] flex items-center justify-center gap-2"
-              style={{
-                background: "linear-gradient(90deg, #FFBA26 0%, #FF9A0E 100%)",
-                boxShadow:
-                  "0px 20px 40px 0px rgba(255, 174, 0, 0.29), 0px 5px 10px 0px rgba(255, 174, 0, 0.26)",
-              }}
-              data-test-id="food-load-more-btn"
-            >
-              Load More
-              <IconWrapper iconName="arrow" size={14} className="text-white" />
-            </Button>
-          </div>
-        ))}
+      {hasMore && !loading && (
+        <div className="food-load-more-container flex justify-center">
+          <Button
+            onClick={onLoadMore}
+            className="food-load-more-btn text-white text-sm md:text-base 2xl:text-[17px] font-bold leading-[100%] w-[160px] md:w-[180px] 2xl:w-[200px] h-[50px] md:h-[56px] 2xl:h-[60px] rounded-xl 2xl:rounded-[14px] flex items-center justify-center gap-2"
+            style={{
+              background: "linear-gradient(90deg, #FFBA26 0%, #FF9A0E 100%)",
+              boxShadow:
+                "0px 20px 40px 0px rgba(255, 174, 0, 0.29), 0px 5px 10px 0px rgba(255, 174, 0, 0.26)",
+            }}
+            data-test-id="food-load-more-btn"
+          >
+            Load More
+            <IconWrapper iconName="arrow" size={14} className="text-white" />
+          </Button>
+        </div>
+      )}
     </section>
   );
 };
