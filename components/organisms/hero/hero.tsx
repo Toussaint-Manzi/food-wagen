@@ -5,14 +5,17 @@ import Image from "next/image";
 import { Button } from "../../atoms/button/button";
 import { IconWrapper } from "../../atoms/icon-wrapper/IconWrapper";
 import { HeroProps, OrderType } from "./hero.types";
+import { useAppDispatch } from "@/store/store";
+import { searchFoods, setSearchQuery } from "@/store/features/food.slice";
 
 export const Hero = ({ className = "" }: HeroProps) => {
+  const dispatch = useAppDispatch();
   const [orderType, setOrderType] = useState<OrderType>("delivery");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [localSearchQuery, setLocalSearchQuery] = useState("");
 
   const handleSearch = () => {
-    console.log("Searching for:", searchQuery);
-    // TODO: Implement search functionality
+    dispatch(setSearchQuery(localSearchQuery));
+    dispatch(searchFoods(localSearchQuery));
   };
 
   return (
@@ -98,8 +101,8 @@ export const Hero = ({ className = "" }: HeroProps) => {
               />
               <input
                 type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                value={localSearchQuery}
+                onChange={(e) => setLocalSearchQuery(e.target.value)}
                 placeholder="What do you like to eat today?"
                 className="food-search-input flex-1 bg-transparent outline-none text-foreground placeholder:text-placeholder text-sm md:text-base lg:text-[17px] 2xl:text-[18px] font-normal leading-[140%]"
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}

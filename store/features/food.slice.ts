@@ -1,20 +1,25 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import {
-  FoodService,
+  getAllFoods,
+  searchFoodByName,
+  createFood as createFoodApi,
+  updateFood as updateFoodApi,
+  deleteFood as deleteFoodApi,
   mapFoodApiToApp,
   mapAppToFoodApi,
 } from "@/services/food.service";
-import type { FoodApiResponse, ApiErrorResponse } from "@/api/config.types";
+import type { ApiErrorResponse } from "@/api/config.types";
 import type { FoodFormData } from "@/lib/validators";
+import type { RootState } from "@/store/store";
 
 // Types
 export interface Food {
   id: string;
   name: string;
   rating: number;
-  imageUrl: string;
+  avatar: string;
   restaurantName: string;
-  restaurantLogo: string;
+  logo: string;
   status: "Open Now" | "Closed";
   price: number;
 }
@@ -52,7 +57,7 @@ export const fetchFoods = createAsyncThunk<
   { rejectValue: string }
 >("food/fetchFoods", async (_, { rejectWithValue }) => {
   try {
-    const response = await FoodService.getAllFoods();
+    const response = await getAllFoods();
     return response.map(mapFoodApiToApp);
   } catch (error) {
     const apiError = error as ApiErrorResponse;
@@ -71,10 +76,10 @@ export const searchFoods = createAsyncThunk<
   try {
     if (!searchQuery.trim()) {
       // If search is empty, fetch all foods
-      const response = await FoodService.getAllFoods();
+      const response = await getAllFoods();
       return response.map(mapFoodApiToApp);
     }
-    const response = await FoodService.searchFoodByName(searchQuery);
+    const response = await searchFoodByName(searchQuery);
     return response.map(mapFoodApiToApp);
   } catch (error) {
     const apiError = error as ApiErrorResponse;
@@ -92,7 +97,7 @@ export const createFood = createAsyncThunk<
 >("food/createFood", async (foodData, { rejectWithValue }) => {
   try {
     const payload = mapAppToFoodApi(foodData);
-    const response = await FoodService.createFood(payload);
+    const response = await createFoodApi(payload);
     return mapFoodApiToApp(response);
   } catch (error) {
     const apiError = error as ApiErrorResponse;
@@ -110,7 +115,7 @@ export const updateFood = createAsyncThunk<
 >("food/updateFood", async ({ id, data }, { rejectWithValue }) => {
   try {
     const payload = mapAppToFoodApi(data);
-    const response = await FoodService.updateFood(id, payload);
+    const response = await updateFoodApi(id, payload);
     return mapFoodApiToApp(response);
   } catch (error) {
     const apiError = error as ApiErrorResponse;
@@ -127,7 +132,7 @@ export const deleteFood = createAsyncThunk<
   { rejectValue: string }
 >("food/deleteFood", async (id, { rejectWithValue }) => {
   try {
-    await FoodService.deleteFood(id);
+    await deleteFoodApi(id);
     return id;
   } catch (error) {
     const apiError = error as ApiErrorResponse;
@@ -257,19 +262,17 @@ const foodSlice = createSlice({
 export const { setSearchQuery, clearError, loadMore, resetPagination } =
   foodSlice.actions;
 
-// Selectors
-export const selectAllFoods = (state: { food: FoodState }) => state.food.foods;
-export const selectFilteredFoods = (state: { food: FoodState }) =>
+// Used selectors because these are either computed values or used in multiplecomponents so to avoid repetition
+export const selectAllFoods = (state: RootState) => state.food.foods;
+export const selectFilteredFoods = (state: RootState) =>
   state.food.filteredFoods;
-export const selectFoodLoading = (state: { food: FoodState }) =>
-  state.food.loading;
-export const selectFoodError = (state: { food: FoodState }) => state.food.error;
-export const selectSearchQuery = (state: { food: FoodState }) =>
-  state.food.searchQuery;
-export const selectPaginatedFoods = (state: { food: FoodState }) => {
+export const selectFoodLoading = (state: RootState) => state.food.loading;
+export const selectFoodError = (state: RootState) => state.food.error;
+export const selectSearchQuery = (state: RootState) => state.food.searchQuery;
+export const selectPaginatedFoods = (state: RootState) => {
   const { filteredFoods, currentPage, itemsPerPage } = state.food;
   return filteredFoods.slice(0, currentPage * itemsPerPage);
 };
-export const selectHasMore = (state: { food: FoodState }) => state.food.hasMore;
+export const selectHasMore = (state: RootState) => state.food.hasMore;
 
 export default foodSlice.reducer;

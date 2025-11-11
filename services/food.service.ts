@@ -1,115 +1,91 @@
 import { ApiClient, handleApiError } from "@/api/config";
-import type {
-  FoodApiResponse,
-  CreateFoodPayload,
-  UpdateFoodPayload,
-  ApiErrorResponse,
-} from "@/api/config.types";
+import type { FoodApiResponse, CreateFoodPayload } from "@/api/config.types";
 
 /**
  * Food Service
  * Handles all API operations related to food items
  */
 
-export class FoodService {
-  private static readonly ENDPOINT = "/Food";
+const ENDPOINT = "/Food";
 
-  /**
-   * Get all food items
-   * @returns Promise with array of food items
-   */
-  static async getAllFoods(): Promise<FoodApiResponse[]> {
-    try {
-      const response = await ApiClient.get<FoodApiResponse[]>(this.ENDPOINT);
-      return response.data;
-    } catch (error) {
-      const apiError = handleApiError(error);
-      console.error("Error fetching foods:", apiError);
-      throw apiError;
-    }
+export async function getAllFoods(): Promise<FoodApiResponse[]> {
+  try {
+    const response = await ApiClient.get<FoodApiResponse[]>(ENDPOINT);
+    return response.data;
+  } catch (error) {
+    const apiError = handleApiError(error);
+    console.error("Error fetching foods:", apiError);
+    throw apiError;
   }
+}
 
-  /**
-   * Search food items by name
-   * @param searchQuery - The name to search for
-   * @returns Promise with filtered array of food items
-   */
-  static async searchFoodByName(
-    searchQuery: string
-  ): Promise<FoodApiResponse[]> {
-    try {
-      const encodedQuery = encodeURIComponent(searchQuery);
-      const response = await ApiClient.get<FoodApiResponse[]>(
-        `${this.ENDPOINT}?name=${encodedQuery}`
-      );
-      return response.data;
-    } catch (error) {
-      const apiError = handleApiError(error);
-      console.error("Error searching foods:", apiError);
-      throw apiError;
-    }
+/**
+ * Search food items by name
+ * @param searchQuery - The name to search for
+ * @returns Promise with filtered array of food items
+ */
+export async function searchFoodByName(
+  searchQuery: string
+): Promise<FoodApiResponse[]> {
+  try {
+    const encodedQuery = encodeURIComponent(searchQuery);
+    const response = await ApiClient.get<FoodApiResponse[]>(
+      `${ENDPOINT}?name=${encodedQuery}`
+    );
+    return response.data;
+  } catch (error) {
+    const apiError = handleApiError(error);
+    console.error("Error searching foods:", apiError);
+    throw apiError;
   }
+}
 
-  /**
-   * Create a new food item
-   * @param payload - The food data to create
-   * @returns Promise with the created food item
-   */
-  static async createFood(
-    payload: CreateFoodPayload
-  ): Promise<FoodApiResponse> {
-    try {
-      const response = await ApiClient.post<FoodApiResponse>(
-        this.ENDPOINT,
-        payload
-      );
-      return response.data;
-    } catch (error) {
-      const apiError = handleApiError(error);
-      console.error("Error creating food:", apiError);
-      throw apiError;
-    }
+export async function createFood(
+  payload: CreateFoodPayload
+): Promise<FoodApiResponse> {
+  try {
+    const response = await ApiClient.post<FoodApiResponse>(ENDPOINT, payload);
+    return response.data;
+  } catch (error) {
+    const apiError = handleApiError(error);
+    console.error("Error creating food:", apiError);
+    throw apiError;
   }
+}
 
-  /**
-   * Update an existing food item
-   * @param id - The ID of the food item to update
-   * @param payload - The updated food data
-   * @returns Promise with the updated food item
-   */
-  static async updateFood(
-    id: string,
-    payload: CreateFoodPayload
-  ): Promise<FoodApiResponse> {
-    try {
-      const response = await ApiClient.put<FoodApiResponse>(
-        `${this.ENDPOINT}/${id}`,
-        payload
-      );
-      return response.data;
-    } catch (error) {
-      const apiError = handleApiError(error);
-      console.error("Error updating food:", apiError);
-      throw apiError;
-    }
+/**
+ * Update an existing food item
+ * @param id - The ID of the food item to update
+ * @param payload - The updated food data
+ * @returns Promise with the updated food item
+ */
+export async function updateFood(
+  id: string,
+  payload: CreateFoodPayload
+): Promise<FoodApiResponse> {
+  try {
+    const response = await ApiClient.put<FoodApiResponse>(
+      `${ENDPOINT}/${id}`,
+      payload
+    );
+    return response.data;
+  } catch (error) {
+    const apiError = handleApiError(error);
+    console.error("Error updating food:", apiError);
+    throw apiError;
   }
+}
 
-  /**
-   * Delete a food item
-   * @param id - The ID of the food item to delete
-   * @returns Promise with the deleted food item data
-   */
-  static async deleteFood(id: string): Promise<FoodApiResponse> {
-    try {
-      const response = await ApiClient.delete<FoodApiResponse>(
-        `${this.ENDPOINT}/${id}`
-      );
-      return response.data;
-    } catch (error) {
-      const apiError = handleApiError(error);
-      console.error("Error deleting food:", apiError);
-      throw apiError;
-    }
+export async function deleteFood(id: string): Promise<FoodApiResponse> {
+  try {
+    const response = await ApiClient.delete<FoodApiResponse>(
+      `${ENDPOINT}/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    const apiError = handleApiError(error);
+    console.error("Error deleting food:", apiError);
+    throw apiError;
   }
 }
 
@@ -120,9 +96,9 @@ export const mapFoodApiToApp = (
   id: string;
   name: string;
   rating: number;
-  imageUrl: string;
+  avatar: string;
   restaurantName: string;
-  restaurantLogo: string;
+  logo: string;
   status: "Open Now" | "Closed";
   price: number;
 } => {
@@ -130,9 +106,9 @@ export const mapFoodApiToApp = (
     id: apiFood.id,
     name: apiFood.name,
     rating: parseFloat(apiFood.rating) || 0,
-    imageUrl: apiFood.avatar,
+    avatar: apiFood.avatar,
     restaurantName: apiFood.name, // API doesn't provide separate restaurant name
-    restaurantLogo: apiFood.logo,
+    logo: apiFood.logo,
     status: apiFood.open ? "Open Now" : "Closed",
     price: parseFloat(apiFood.price || apiFood.Price || "0") || 0,
   };
@@ -155,5 +131,3 @@ export const mapAppToFoodApi = (appFood: {
     logo: appFood.restaurant_logo,
   };
 };
-
-export default FoodService;
