@@ -5,9 +5,9 @@ export interface FoodCardProps {
   name: string;
   price: number;
   rating: number;
-  imageUrl: string;
+  avatar: string;
   restaurantName: string;
-  restaurantLogo: string;
+  logo: string;
   status: RestaurantStatus;
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;

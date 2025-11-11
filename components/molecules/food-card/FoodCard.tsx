@@ -12,9 +12,9 @@ export const FoodCard = ({
   name,
   price,
   rating,
-  imageUrl,
+  avatar,
   restaurantName,
-  restaurantLogo,
+  logo,
   status,
   onEdit,
   onDelete,
@@ -27,10 +27,9 @@ export const FoodCard = ({
     >
       {/* First Section - Food Photo */}
       <div className="food-photo relative w-full h-60 md:h-[270px] lg:h-[290px] 2xl:h-[301px] rounded-xl 2xl:rounded-2xl overflow-hidden">
-        {/* Background Image */}
+        {/* Added image placeholder in case the avatar is missing */}
         <Image
-          // TODO: Replace with imageUrl when available
-          src="/images/test.png"
+          src={avatar ? avatar : "/images/placeholder-img.png"}
           alt={name}
           fill
           className="object-cover"
@@ -49,9 +48,9 @@ export const FoodCard = ({
         <div className="food-restaurant-details flex items-center gap-3 md:gap-4 2xl:gap-7 flex-1 min-w-0">
           {/* Restaurant Logo */}
           <div className="food-restaurant-logo relative w-12 h-12 md:w-14 md:h-14 2xl:w-16 2xl:h-16 rounded-md 2xl:rounded-lg overflow-hidden shrink-0">
+            {/* Added image placeholder in case the logo is missing */}
             <Image
-              //TODO: Replace with restaurantLogo when available
-              src="/images/test-2.png"
+              src={logo ? logo : "/images/placeholder-img.png"}
               alt={restaurantName}
               fill
               className="object-cover"
