@@ -23,9 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${sourceSans.variable} antialiased`}>
-        <Header />
+        {/* <Header /> */}
         <main className="">{children}</main>
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );

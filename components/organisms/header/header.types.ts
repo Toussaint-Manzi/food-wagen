@@ -1,3 +1,4 @@
 export interface HeaderProps {
-  // No props needed - component handles everything internally
+  onAddMealClick?: () => void;
+  className?: string;
 }

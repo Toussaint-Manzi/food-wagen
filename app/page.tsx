@@ -4,7 +4,9 @@ import { useState } from "react";
 import { Header } from "@/components/organisms/header/Header";
 import { Hero } from "@/components/organisms/hero/hero";
 import { FeaturedMeals } from "@/components/organisms/featured-meals/FeaturedMeals";
+import { FoodModal } from "@/components/organisms/food-modal/FoodModal";
 import { Footer } from "@/components/organisms/footer/Footer";
+import { FoodFormData } from "@/lib/validators";
 
 // Sample data - will be replaced with API data later
 const sampleFoods = [
@@ -53,15 +55,71 @@ const sampleFoods = [
 export default function Home() {
   const [foods, setFoods] = useState(sampleFoods);
   const [hasMore, setHasMore] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState<"add" | "edit">("add");
+  const [editingFood, setEditingFood] = useState<FoodFormData | undefined>();
+
+  const handleAddMeal = () => {
+    setModalMode("add");
+    setEditingFood(undefined);
+    setIsModalOpen(true);
+  };
 
   const handleEdit = (id: string) => {
-    console.log("Edit food:", id);
-    // TODO: Open edit modal
+    const food = foods.find((f) => f.id === id);
+    if (food) {
+      setModalMode("edit");
+      setEditingFood({
+        food_name: food.name,
+        food_rating: food.rating,
+        food_image: food.imageUrl,
+        restaurant_name: food.restaurantName,
+        restaurant_logo: food.restaurantLogo,
+        restaurant_status: food.status,
+      });
+      setIsModalOpen(true);
+    }
   };
 
   const handleDelete = (id: string) => {
     console.log("Delete food:", id);
     // TODO: Open delete confirmation modal
+  };
+
+  const handleModalSubmit = async (data: FoodFormData) => {
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    if (modalMode === "add") {
+      const newFood = {
+        id: String(foods.length + 1),
+        name: data.food_name,
+        price: Math.random() * 20 + 5, // Random price for demo
+        rating: data.food_rating,
+        imageUrl: data.food_image,
+        restaurantName: data.restaurant_name,
+        restaurantLogo: data.restaurant_logo,
+        status: data.restaurant_status,
+      };
+      setFoods([...foods, newFood]);
+    } else {
+      // Edit mode - find and update the food
+      setFoods(
+        foods.map((food) =>
+          food.name === editingFood?.food_name
+            ? {
+                ...food,
+                name: data.food_name,
+                rating: data.food_rating,
+                imageUrl: data.food_image,
+                restaurantName: data.restaurant_name,
+                restaurantLogo: data.restaurant_logo,
+                status: data.restaurant_status,
+              }
+            : food
+        )
+      );
+    }
   };
 
   const handleLoadMore = () => {
@@ -71,15 +129,28 @@ export default function Home() {
   };
 
   return (
-    <main className="food-page min-h-screen flex flex-col">
-      <Hero />
-      <FeaturedMeals
-        foods={foods}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-        onLoadMore={handleLoadMore}
-        hasMore={hasMore}
+    <div className="food-page min-h-screen flex flex-col">
+      <Header onAddMealClick={handleAddMeal} />
+      <main className="flex-1">
+        <Hero />
+        <FeaturedMeals
+          foods={foods}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+          onLoadMore={handleLoadMore}
+          hasMore={hasMore}
+        />
+      </main>
+      <Footer />
+
+      {/* Food Modal */}
+      <FoodModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleModalSubmit}
+        mode={modalMode}
+        initialData={editingFood}
       />
-    </main>
+    </div>
   );
 }

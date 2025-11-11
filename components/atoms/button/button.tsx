@@ -19,7 +19,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const stateClass = disabled
       ? "bg-border text-text-secondary"
       : variant === "primary"
-      ? "bg-[linear-gradient(90deg,#2663EB_0%,#5187FF_100%)] text-white"
+      ? ""
       : "";
 
     const classes = `${base} ${stateClass}`.trim();

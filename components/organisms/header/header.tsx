@@ -1,17 +1,22 @@
 "use client";
 
-import Image from "next/image";
 import Logo from "@/components/utils/logo/Logo";
 import Button from "@/components/atoms/button/Button";
+import { HeaderProps } from "./Header.types";
 
-export const Header = () => {
+export const Header = ({ onAddMealClick, className = "" }: HeaderProps) => {
   const handleAddMealClick = () => {
-    // TODO: Open Add Meal modal
-    console.log("Add Meal clicked");
+    if (onAddMealClick) {
+      onAddMealClick();
+    } else {
+      console.log("Add Meal clicked");
+    }
   };
 
   return (
-    <header className="food-header w-full px-4 sm:px-6 md:px-[220px] py-3 md:py-4 bg-white">
+    <header
+      className={`food-header w-full px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 2xl:px-[220px] py-3 md:py-4 bg-white ${className}`}
+    >
       <div className="food-header-container max-w-[1440px] mx-auto flex items-center justify-between">
         {/* Logo Section */}
         <Logo />
