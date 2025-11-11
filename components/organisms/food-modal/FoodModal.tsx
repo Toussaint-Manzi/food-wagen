@@ -89,7 +89,7 @@ export const FoodModal = ({
     >
       {/* Modal Container */}
       <div
-        className="food-modal bg-white w-full max-w-full sm:max-w-[600px] md:max-w-[750px] lg:max-w-[850px] 2xl:w-[934px] rounded-3xl p-2 md:p-2.5 2xl:py-2.5 2xl:px-0 overflow-y-auto"
+        className="food-modal bg-white w-full max-w-full sm:max-w-[600px] md:max-w-[750px] lg:max-w-[850px] 2xl:w-[934px] rounded-3xl p-2 md:p-2.5 2xl:py-2.5 2xl:px-20 lg:px-16 md:px-5 px-0 overflow-y-auto"
         style={{
           boxShadow: "0px 2px 25px 0px rgba(0, 0, 0, 0.15)",
         }}

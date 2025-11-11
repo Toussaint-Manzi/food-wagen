@@ -1,1 +1,5 @@
-// LABEL TYPES HERE
+import { LabelHTMLAttributes } from "react";
+
+export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
+  required?: boolean;
+}

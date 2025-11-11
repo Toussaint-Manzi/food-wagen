@@ -5,6 +5,7 @@ import { Header } from "@/components/organisms/header/Header";
 import { Hero } from "@/components/organisms/hero/hero";
 import { FeaturedMeals } from "@/components/organisms/featured-meals/FeaturedMeals";
 import { FoodModal } from "@/components/organisms/food-modal/FoodModal";
+import { DeleteModal } from "@/components/organisms/delete-modal/DeleteModal";
 import { Footer } from "@/components/organisms/footer/Footer";
 import { FoodFormData } from "@/lib/validators";
 
@@ -56,8 +57,13 @@ export default function Home() {
   const [foods, setFoods] = useState(sampleFoods);
   const [hasMore, setHasMore] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [editingFood, setEditingFood] = useState<FoodFormData | undefined>();
+  const [deletingFoodId, setDeletingFoodId] = useState<string | undefined>();
+  const [deletingFoodName, setDeletingFoodName] = useState<
+    string | undefined
+  >();
 
   const handleAddMeal = () => {
     setModalMode("add");
@@ -82,8 +88,23 @@ export default function Home() {
   };
 
   const handleDelete = (id: string) => {
-    console.log("Delete food:", id);
-    // TODO: Open delete confirmation modal
+    const food = foods.find((f) => f.id === id);
+    if (food) {
+      setDeletingFoodId(id);
+      setDeletingFoodName(food.name);
+      setIsDeleteModalOpen(true);
+    }
+  };
+
+  const handleConfirmDelete = async () => {
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    if (deletingFoodId) {
+      setFoods(foods.filter((food) => food.id !== deletingFoodId));
+      setDeletingFoodId(undefined);
+      setDeletingFoodName(undefined);
+    }
   };
 
   const handleModalSubmit = async (data: FoodFormData) => {
@@ -150,6 +171,14 @@ export default function Home() {
         onSubmit={handleModalSubmit}
         mode={modalMode}
         initialData={editingFood}
+      />
+
+      {/* Delete Modal */}
+      <DeleteModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={handleConfirmDelete}
+        foodName={deletingFoodName}
       />
     </div>
   );
