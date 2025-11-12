@@ -24,7 +24,7 @@ export const Header = ({ onAddMealClick, className = "" }: HeaderProps) => {
         {/* Add Meal Button */}
         <Button
           onClick={handleAddMealClick}
-          className="food-add-meal-btn text-white text-sm md:text-[17px] font-bold leading-[100%] w-[120px] md:w-[150px] h-[38px] md:h-[42px] rounded-[14px]"
+          className="food-add-meal-btn text-white text-sm md:text-[17px] font-bold leading-[100%] w-[120px] md:w-[150px] h-[38px] md:h-[42px] rounded-[14px] cursor-pointer hover:opacity-90 transition-opacity duration-150"
           style={{
             background: "linear-gradient(90deg, #FFBA26 0%, #FF9A0E 100%)",
             boxShadow:

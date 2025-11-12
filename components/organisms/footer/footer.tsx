@@ -160,7 +160,7 @@ export const Footer = ({ className = "" }: FooterProps) => {
                 {/* Subscribe Button */}
                 <Button
                   onClick={handleSubscribe}
-                  className="food-subscribe-btn text-white text-base md:text-[17px] font-bold leading-[100%] w-full sm:w-[120px] md:w-[133px] h-[50px] md:h-[60px] rounded-lg"
+                  className="food-subscribe-btn text-white text-base md:text-[17px] font-bold leading-[100%] w-full sm:w-[120px] md:w-[133px] h-[50px] md:h-[60px] rounded-lg cursor-pointer hover:opacity-90 transition-opacity duration-150"
                   style={{
                     background:
                       "linear-gradient(90deg, #FFB800 0%, #FF8A00 100%)",

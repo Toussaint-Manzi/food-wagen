@@ -130,7 +130,7 @@ export const Hero = () => {
             <Button
               onClick={() => handleSearch()}
               disabled={isSearching}
-              className="food-find-meal-btn text-white text-sm md:text-base lg:text-[17px] 2xl:text-[18px] font-bold leading-[100%] h-12 md:h-[54px] lg:h-[58px] 2xl:h-[60px] w-full sm:w-auto md:w-40 lg:w-[180px] 2xl:w-[197px] rounded-lg 2xl:rounded-xl flex items-center justify-center gap-2 transition-all hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="food-find-meal-btn text-white text-sm cursor-pointer md:text-base lg:text-[17px] 2xl:text-[18px] font-bold leading-[100%] h-12 md:h-[54px] lg:h-[58px] 2xl:h-[60px] w-full sm:w-auto md:w-40 lg:w-[180px] 2xl:w-[197px] rounded-lg 2xl:rounded-xl flex items-center justify-center gap-2 transition-all hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
                 background: isSearching
                   ? "#ccc"
