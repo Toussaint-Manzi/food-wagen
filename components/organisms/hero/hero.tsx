@@ -62,7 +62,7 @@ export const Hero = () => {
             {/* Delivery Button */}
             <button
               onClick={() => setOrderType("delivery")}
-              className={`food-order-type-btn flex items-center justify-center gap-1.5 md:gap-2 rounded-lg w-full sm:w-[120px] md:w-[130px] lg:w-[140px] 2xl:w-[148px] h-11 md:h-[50px] lg:h-[54px] 2xl:h-14 transition-all ${
+              className={`food-order-type-btn cursor-pointer flex items-center justify-center gap-1.5 md:gap-2 rounded-lg w-full sm:w-[120px] md:w-[130px] lg:w-[140px] 2xl:w-[148px] h-11 md:h-[50px] lg:h-[54px] 2xl:h-14 transition-all ${
                 orderType === "delivery"
                   ? "bg-[#F172281A] text-selected"
                   : "bg-transparent text-[#757575]"
@@ -84,7 +84,7 @@ export const Hero = () => {
             {/* Pickup Button */}
             <button
               onClick={() => setOrderType("pickup")}
-              className={`food-order-type-btn flex items-center justify-center gap-1.5 md:gap-2 rounded-lg w-full sm:w-[120px] md:w-[130px] lg:w-[140px] 2xl:w-[148px] h-11 md:h-[50px] lg:h-[54px] 2xl:h-14 transition-all ${
+              className={`food-order-type-btn flex cursor-pointer items-center justify-center gap-1.5 md:gap-2 rounded-lg w-full sm:w-[120px] md:w-[130px] lg:w-[140px] 2xl:w-[148px] h-11 md:h-[50px] lg:h-[54px] 2xl:h-14 transition-all ${
                 orderType === "pickup"
                   ? "bg-[#F172281A] text-selected"
                   : "bg-transparent text-[#757575]"

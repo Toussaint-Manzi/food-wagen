@@ -44,7 +44,7 @@ export const MenuDropdown = ({
       {/* Menu Icon Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="food-menu-btn text-[#424242] text-lg md:text-xl hover:text-selected transition-colors"
+        className="food-menu-btn text-[#424242] cursor-pointer text-lg md:text-xl hover:text-selected transition-colors"
         data-test-id="food-menu-btn"
         aria-label="Menu"
       >
@@ -69,14 +69,14 @@ export const MenuDropdown = ({
         >
           <button
             onClick={handleEdit}
-            className="food-menu-item-edit block w-full text-left text-[10px] md:text-xs 2xl:text-[12px] font-medium text-[#425466] hover:text-selected py-1.5 transition-colors"
+            className="food-menu-item-edit cursor-pointer block w-full text-left text-[10px] md:text-xs 2xl:text-[12px] font-medium text-[#425466] hover:text-selected py-1.5 transition-colors"
             data-test-id="food-menu-edit-btn"
           >
             Edit
           </button>
           <button
             onClick={handleDelete}
-            className="food-menu-item-delete block w-full text-left text-[10px] md:text-xs 2xl:text-[12px] font-medium text-[#FF3B30] hover:opacity-80 py-1.5 transition-colors"
+            className="food-menu-item-delete cursor-pointer block w-full text-left text-[10px] md:text-xs 2xl:text-[12px] font-medium text-[#FF3B30] hover:opacity-80 py-1.5 transition-colors"
             data-test-id="food-menu-delete-btn"
           >
             Delete
