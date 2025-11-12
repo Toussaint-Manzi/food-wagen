@@ -54,7 +54,7 @@ export const FeaturedMeals = ({
         <div className="food-load-more-container flex justify-center">
           <Button
             onClick={onLoadMore}
-            className="food-load-more-btn text-white text-sm md:text-base 2xl:text-[17px] font-bold leading-[100%] w-[160px] md:w-[180px] 2xl:w-[200px] h-[50px] md:h-[56px] 2xl:h-[60px] rounded-xl 2xl:rounded-[14px] flex items-center justify-center gap-2"
+            className="food-load-more-btn text-white text-sm md:text-base 2xl:text-[17px] font-bold leading-[100%] w-40 md:w-[180px] 2xl:w-[200px] h-[50px] md:h-14 2xl:h-[60px] rounded-xl 2xl:rounded-[14px] flex items-center justify-center gap-2"
             style={{
               background: "linear-gradient(90deg, #FFBA26 0%, #FF9A0E 100%)",
               boxShadow:

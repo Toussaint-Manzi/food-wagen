@@ -81,7 +81,7 @@ export const FoodModal = ({
 
   return (
     <div
-      className={`food-modal-overlay fixed inset-0 bg-[#C6C2C2]/52 flex items-center justify-center z-50 2xl:py-1 p-4 ${className}`}
+      className={`food-modal-overlay fixed inset-0 bg-[#C6C2C2]/52 flex items-center justify-center z-50 2xl:py-1 md:p-4 p-0 ${className}`}
       onClick={(e) => {
         if (e.target === e.currentTarget) handleCancel();
       }}
@@ -89,7 +89,7 @@ export const FoodModal = ({
     >
       {/* Modal Container */}
       <div
-        className="food-modal bg-white w-full max-w-full sm:max-w-[600px] md:max-w-[750px] lg:max-w-[850px] 2xl:w-[934px] rounded-3xl p-2 md:p-2.5 2xl:py-2.5 2xl:px-20 lg:px-16 md:px-5 px-0 overflow-y-auto"
+        className="food-modal bg-white w-full sm:max-w-[600px] md:max-w-[750px] lg:max-w-[850px] 2xl:w-[934px] rounded-3xl p-2 md:p-2.5 2xl:py-2.5 2xl:px-20 lg:px-16 md:px-5 px-0 overflow-y-auto"
         style={{
           boxShadow: "0px 2px 25px 0px rgba(0, 0, 0, 0.15)",
         }}
