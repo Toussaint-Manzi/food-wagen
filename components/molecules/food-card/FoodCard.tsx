@@ -22,7 +22,7 @@ export const FoodCard = ({
 }: FoodCardProps) => {
   return (
     <div
-      className={`food-card flex flex-col gap-5 md:gap-6 2xl:gap-7 w-full max-w-[300px] md:max-w-[320px] lg:max-w-[340px] 2xl:w-[357px] h-auto 2xl:h-[463px] ${className}`}
+      className={`food-card flex flex-col gap-5 md:gap-6 2xl:gap-7 w-full max-w-[300px] md:max-w-[320px] lg:max-w-[340px] 2xl:w-[357px] h-auto 2xl:h-[463px] animate-slide-up hover:scale-[1.02] transition-transform duration-150 ease-out ${className}`}
       data-test-id={`food-card-${id}`}
     >
       {/* First Section - Food Photo */}

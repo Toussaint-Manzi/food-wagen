@@ -14,7 +14,7 @@ function Logo({
         className="food-logo-image"
       />
       <h1
-        className="food-logo-text text-[31.11px] font-bold leading-[120%] tracking-[-0.025em]"
+        className="food-logo-text text-[20px] md:text-[31.11px] font-bold leading-[120%] tracking-[-0.025em]"
         style={{ letterSpacing: "-2.5%" }}
       >
         <span className="text-selected">Food</span>

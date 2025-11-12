@@ -5,13 +5,22 @@ import { Button } from "../../atoms/button/button";
 import { FooterProps } from "./footer.types";
 import Link from "next/link";
 import { IconWrapper } from "@/components/atoms/icon-wrapper/IconWrapper";
+import { useAppDispatch } from "@/store/store";
+import { showToast } from "@/store/features/ui.slice";
 
 export const Footer = ({ className = "" }: FooterProps) => {
+  const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
 
   const handleSubscribe = () => {
     if (email) {
       console.log("Subscribe email:", email);
+      dispatch(
+        showToast({
+          message: "Thank you for subscribing!",
+          type: "success",
+        })
+      );
       setEmail("");
     }
   };
@@ -131,9 +140,9 @@ export const Footer = ({ className = "" }: FooterProps) => {
               <h3 className="food-footer-newsletter-title text-white font-bold text-base md:text-[18px] leading-[120%] mb-3 md:mb-4">
                 Receive exclusive offers in your mailbox
               </h3>
-              <div className="food-newsletter-form flex flex-col sm:flex-row gap-2 md:gap-4">
+              <div className="food-newsletter-form flex flex-col xl:flex-row gap-2 md:gap-4">
                 {/* Email Input */}
-                <div className="food-email-input-wrapper relative flex items-center w-full sm:w-[280px] md:w-[334px] h-[50px] md:h-[60px] bg-[#424242] rounded-lg px-3 md:px-4 py-2 gap-2">
+                <div className="food-email-input-wrapper relative flex items-center w-full sm:w-[280px] md:w-[334px] h-[50px] bg-[#424242] md:h-[60px] rounded-lg px-3 md:px-4 py-2 gap-2">
                   <IconWrapper
                     iconName="envelope"
                     size={20}

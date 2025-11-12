@@ -64,7 +64,7 @@ export const MenuDropdown = ({
       {/* Dropdown Menu */}
       {isOpen && (
         <div
-          className="food-menu-items absolute right-0 top-8 w-[70px] md:w-[80px] 2xl:w-[84px] h-auto bg-white rounded-[5px] border border-[#EDEEF1] py-1 pl-2 md:pl-3 shadow-lg z-10"
+          className="food-menu-items absolute right-0 top-8 w-[70px] md:w-20 2xl:w-[84px] h-auto bg-white rounded-[5px] border border-[#EDEEF1] py-1 pl-2 md:pl-3 shadow-lg z-10"
           data-test-id="food-menu-items"
         >
           <button
