@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { FoodCard } from "@/components/molecules/food-card/FoodCard";

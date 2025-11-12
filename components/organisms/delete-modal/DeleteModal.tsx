@@ -48,7 +48,7 @@ export const DeleteModal = ({
 
   return (
     <div
-      className={`food-delete-modal-overlay fixed inset-0 bg-[#C6C2C2]/52 flex 2xl:items-start justify-center z-50 p-4 2xl:py-20 ${className}`}
+      className={`food-delete-modal-overlay fixed inset-0 bg-[#C6C2C2]/52 flex 2xl:items-start justify-center z-50 p-0 md:p-4 2xl:py-20 ${className}`}
       onClick={(e) => {
         if (e.target === e.currentTarget && !isDeleting) handleCancel();
       }}
@@ -56,7 +56,7 @@ export const DeleteModal = ({
     >
       {/* Modal Container */}
       <div
-        className="food-delete-modal bg-white w-full max-w-[90%] sm:max-w-[500px] md:max-w-[650px] lg:max-w-[750px] 2xl:w-[934px] h-auto rounded-2xl 2xl:rounded-3xl p-2 md:p-2.5 2xl:p-2.5 overflow-hidden"
+        className="food-delete-modal bg-white w-full sm:max-w-[500px] md:max-w-[650px] lg:max-w-[750px] 2xl:w-[934px] h-[250px] rounded-2xl 2xl:rounded-3xl p-2 md:p-2.5 2xl:p-2.5 overflow-hidden"
         style={{
           boxShadow: "0px 2px 25px 0px rgba(0, 0, 0, 0.15)",
         }}

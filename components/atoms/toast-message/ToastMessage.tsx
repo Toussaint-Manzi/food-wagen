@@ -151,7 +151,7 @@ export const ToastMessage = ({
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
-            <div className="flex-shrink-0 pt-1">{getIcon()}</div>
+            <div className="shrink-0 pt-1">{getIcon()}</div>
             <div className="flex flex-col flex-1">
               <span className="text-foreground text-base font-semibold">
                 {getMessageTypeTitle()}
