@@ -20,7 +20,6 @@ import {
   selectLoading,
   selectHasMore,
   selectFoods,
-  Food,
 } from "@/store/features/food.slice";
 import { hideToast, selectToast, showToast } from "@/store/features/ui.slice";
 
